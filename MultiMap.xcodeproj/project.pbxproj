@@ -11,7 +11,7 @@
 		D33C711C2A6F0D6C0020F0E3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C711B2A6F0D6C0020F0E3 /* ContentView.swift */; };
 		D33C711E2A6F0D6F0020F0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33C711D2A6F0D6F0020F0E3 /* Assets.xcassets */; };
 		D33C71222A6F0D6F0020F0E3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33C71212A6F0D6F0020F0E3 /* Preview Assets.xcassets */; };
-		D33C712D2A7065980020F0E3 /* BeantownButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C712C2A7065970020F0E3 /* BeantownButtons.swift */; };
+		D33C712D2A7065980020F0E3 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C712C2A7065970020F0E3 /* Buttons.swift */; };
 		D33C712F2A7065A00020F0E3 /* ItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33C712E2A7065A00020F0E3 /* ItemInfoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,7 +22,7 @@
 		D33C711D2A6F0D6F0020F0E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D33C711F2A6F0D6F0020F0E3 /* MultiMap.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MultiMap.entitlements; sourceTree = "<group>"; };
 		D33C71212A6F0D6F0020F0E3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D33C712C2A7065970020F0E3 /* BeantownButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeantownButtons.swift; sourceTree = "<group>"; };
+		D33C712C2A7065970020F0E3 /* Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		D33C712E2A7065A00020F0E3 /* ItemInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,7 +59,7 @@
 				D33C71192A6F0D6C0020F0E3 /* MultiMapApp.swift */,
 				D33C711B2A6F0D6C0020F0E3 /* ContentView.swift */,
 				D33C712E2A7065A00020F0E3 /* ItemInfoView.swift */,
-				D33C712C2A7065970020F0E3 /* BeantownButtons.swift */,
+				D33C712C2A7065970020F0E3 /* Buttons.swift */,
 				D33C711D2A6F0D6F0020F0E3 /* Assets.xcassets */,
 				D33C711F2A6F0D6F0020F0E3 /* MultiMap.entitlements */,
 				D33C71202A6F0D6F0020F0E3 /* Preview Content */,
@@ -146,7 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33C711C2A6F0D6C0020F0E3 /* ContentView.swift in Sources */,
-				D33C712D2A7065980020F0E3 /* BeantownButtons.swift in Sources */,
+				D33C712D2A7065980020F0E3 /* Buttons.swift in Sources */,
 				D33C711A2A6F0D6C0020F0E3 /* MultiMapApp.swift in Sources */,
 				D33C712F2A7065A00020F0E3 /* ItemInfoView.swift in Sources */,
 			);
@@ -280,8 +280,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MultiMap/Preview Content\"";
 				DEVELOPMENT_TEAM = NGR89BBT5V;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be shown for sample purposes";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -318,8 +320,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MultiMap/Preview Content\"";
 				DEVELOPMENT_TEAM = NGR89BBT5V;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location will be shown for sample purposes";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

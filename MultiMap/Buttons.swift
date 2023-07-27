@@ -1,5 +1,5 @@
 //
-//  BeantownButtons.swift
+//  Buttons.swift
 //  MultiMap
 //
 //  Created by Brian Balthazor on 7/24/23.
@@ -9,8 +9,9 @@ import SwiftUI
 import MapKit
 
 
-struct BeantownButtons: View {
-    
+struct Buttons: View {
+    @ObservedObject var locationsHandler = LocationsHandler.shared
+
     @Binding var position: MapCameraPosition
     @Binding var searchResults: [MKMapItem]
     
@@ -33,16 +34,34 @@ struct BeantownButtons: View {
             .buttonStyle(.borderedProminent)
             
             Button {
-                position = .region(.central)
+                let location = locationsHandler.manager.location
+                guard let latitude = location?.coordinate.latitude else { return }
+                guard let longitude = location?.coordinate.longitude else { return }
+
+                let central = MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                    span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+                    )
+
+                position = .region(central)
             } label: {
-                Label("Central", systemImage: "beach.umbrella")
+                Label("Central", systemImage: "plus.magnifyingglass")
             }
             .buttonStyle(.bordered)
             
             Button {
-                position = .region(.wide)
+                let location = locationsHandler.manager.location
+                guard let latitude = location?.coordinate.latitude else { return }
+                guard let longitude = location?.coordinate.longitude else { return }
+
+                let wide = MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                    span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4)
+                    )
+
+                position = .region(wide)
             } label: {
-                Label("Wide", systemImage: "beach.umbrella")
+                Label("Wide", systemImage: "minus.magnifyingglass")
             }
             .buttonStyle(.bordered)
             

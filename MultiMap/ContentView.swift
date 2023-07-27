@@ -5,6 +5,7 @@
 //  Created by Brian Balthazor on 7/24/23.
 //
 
+import os
 import SwiftUI
 import MapKit
 
@@ -12,46 +13,34 @@ extension CLLocationCoordinate2D {
     static let parking = CLLocationCoordinate2D(latitude: 33.797856, longitude: -116.536688)
 }
 
-extension MKCoordinateRegion {
-    static let central = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 33.797856, longitude: -116.536688),
-        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        )
+@MainActor class LocationsHandler: ObservableObject {
     
-    static let wide = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 33.797856, longitude: -116.536688),
-        span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4)
-        )
+    static let shared = LocationsHandler()
+    public let manager: CLLocationManager
 
+    init() {
+        self.manager = CLLocationManager()
+        if self.manager.authorizationStatus == .notDetermined {
+            self.manager.requestWhenInUseAuthorization()
+        }
+    }
 }
 
 struct ContentView: View {
-    
-    @State private var position: MapCameraPosition = .automatic
+    let logger = Logger(subsystem: "net.appsird.multimap", category: "Demo")
+    @ObservedObject var locationsHandler = LocationsHandler.shared
+
+    @State private var position: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var visibleRegion: MKCoordinateRegion?
     @State private var searchResults: [MKMapItem] = []
     @State private var selectedResult: MKMapItem?
     @State private var route: MKRoute?
-
+    
+    
     var body: some View {
         
         Map(position: $position, selection: $selectedResult){
-            
-            let parking = CLLocationCoordinate2D(latitude: 33.797856, longitude: -116.536688)
-            Annotation("Parking",
-                       coordinate: parking
-            ) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(.background)
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(.secondary, lineWidth: 5)
-                    Image(systemName: "car")
-                        .padding(5)
-                }
-            }
-            .annotationTitles(.hidden)
-            
+                        
             ForEach(searchResults, id: \.self) {result in
                 Marker(item: result)
             }
@@ -70,7 +59,7 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .padding([.top, .horizontal])
                     }
-                    BeantownButtons(position: $position, searchResults: $searchResults, visibleRegion: visibleRegion)
+                    Buttons(position: $position, searchResults: $searchResults, visibleRegion: visibleRegion)
                         .padding(.top)
                 }
                 Spacer()
@@ -99,8 +88,11 @@ struct ContentView: View {
         route = nil
         guard let selectedResult else { return }
         
+        let location = locationsHandler.manager.location
+        guard let coordinate = location?.coordinate else { return }
+
         let request = MKDirections.Request()
-        request.source = MKMapItem(placemark: MKPlacemark(coordinate: .parking))
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
         request.destination = selectedResult
         
         Task {
@@ -112,6 +104,6 @@ struct ContentView: View {
 }
 
 
-//#Preview {
-//    ContentView()
-//}
+#Preview {
+    ContentView()
+}
