@@ -9,9 +9,6 @@ import os
 import SwiftUI
 import MapKit
 
-extension CLLocationCoordinate2D {
-    static let parking = CLLocationCoordinate2D(latitude: 33.797856, longitude: -116.536688)
-}
 
 @MainActor class LocationsHandler: ObservableObject {
     

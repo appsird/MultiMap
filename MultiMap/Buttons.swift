@@ -74,9 +74,9 @@ struct Buttons: View {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query
         request.resultTypes = .pointOfInterest
-        request.region = visibleRegion ?? MKCoordinateRegion(
-            center: .parking,
-            span: MKCoordinateSpan(latitudeDelta: 0.000005, longitudeDelta: 0.000005))
+        
+        guard let region = visibleRegion else { return }
+        request.region = region
         
         Task {
             let search = MKLocalSearch(request: request)
