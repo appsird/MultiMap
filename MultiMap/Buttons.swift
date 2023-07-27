@@ -32,7 +32,14 @@ struct Buttons: View {
                 Label("Beaches", systemImage: "beach.umbrella")
             }
             .buttonStyle(.bordered)
-                        
+                   
+            Button {
+                searchResults = []
+            } label: {
+                Label("Trash", systemImage: "trash")
+            }
+            .buttonStyle(.bordered)
+
         }
         .labelStyle(.iconOnly)
     }
